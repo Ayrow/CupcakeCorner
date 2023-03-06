@@ -11,7 +11,21 @@ struct ContentView: View {
     @StateObject var order = Order()
     
     var body: some View {
-        Text("")
+        NavigationStack {
+            Form {
+                Section {
+                    Picker("Select your cake type", selection: $order.type) {
+                        ForEach(Order.types.indices) {
+                            Text(Order.types[$0])
+                        }
+                    }
+                    
+                    Stepper("Number of cakes: \(order.quantity)", value: $order.quantity, in: 3...20)
+                    
+                }
+            }
+            .navigationTitle("Cupcake Corner")
+        }
         
         
     }
